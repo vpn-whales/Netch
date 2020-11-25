@@ -283,8 +283,11 @@ namespace Netch.Forms
 
             Configuration.Save();
 
-            if (File.Exists("data\\last.json"))
-                File.Delete("data\\last.json");
+            foreach (var file in new[] {"data\\last.json", "data\\privoxy.conf"})
+            {
+                if (File.Exists(file))
+                    File.Delete(file);
+            }
 
             State = State.Terminating;
         }
@@ -469,7 +472,7 @@ namespace Netch.Forms
             Activate();
         }
 
-        private void NotifyTip(string text, int timeout = 0, bool info = true)
+        public void NotifyTip(string text, int timeout = 0, bool info = true)
         {
             // 会阻塞线程 timeout 秒
             NotifyIcon.ShowBalloonTip(timeout,

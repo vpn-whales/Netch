@@ -48,10 +48,11 @@ namespace Netch.Servers.VLESS.VLESSForm
                     "false" => false,
                     _ => null
                 },
-                server.UseMux?.ToString() ?? "");
-            CreateCheckBox("TLSSecure", "TLS Secure",
-                b => server.TLSSecure = b,
-                server.TLSSecure);
+                server.UseMux?.ToString().ToLower() ?? "");
+            CreateComboBox("TLSSecure", "TLS Secure",
+                VLESSGlobal.TLSSecure,
+                s => server.TLSSecureType = s,
+                server.TLSSecureType);
         }
     }
 }
